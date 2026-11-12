@@ -1,1 +1,78 @@
-(function(){'use strict';var toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('.main-nav');if(toggle&&nav){toggle.addEventListener('click',function(){var open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));toggle.setAttribute('aria-label',open?'Открыть меню':'Закрыть меню');nav.classList.toggle('is-open',!open)});nav.querySelectorAll('a').forEach(function(link){var current=location.pathname.split('/').pop()||'index.html';if(link.getAttribute('href')===current){link.setAttribute('aria-current','page')}link.addEventListener('click',function(){toggle.setAttribute('aria-expanded','false');nav.classList.remove('is-open')})})}var year=document.getElementById('current-year');if(year){year.textContent=new Date().getFullYear()}var form=document.getElementById('feedback-form');if(form){form.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(form),subject=encodeURIComponent('Обращение с сайта «Форма»: '+d.get('topic')),body=encodeURIComponent('Имя: '+d.get('name')+'\nПочта: '+d.get('email')+'\nТема: '+d.get('topic')+'\n\n'+d.get('message'));document.getElementById('form-note').textContent='Открываем почтовую программу. Если она не запустилась, напишите на hello@forma-home.ru.';location.href='mailto:hello@forma-home.ru?subject='+subject+'&body='+body})}}());
+// Основной JavaScript сайта интерьерной студии «Форма».
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. Мобильное меню.
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector(".main-nav");
+
+    if (menuButton && navigation) {
+        menuButton.addEventListener("click", function () {
+            const menuIsOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+            menuButton.setAttribute("aria-expanded", String(!menuIsOpen));
+            menuButton.setAttribute(
+                "aria-label",
+                menuIsOpen ? "Открыть меню" : "Закрыть меню"
+            );
+
+            navigation.classList.toggle("is-open", !menuIsOpen);
+        });
+
+        // Закрываем меню после перехода по любой ссылке.
+        navigation.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Открыть меню");
+                navigation.classList.remove("is-open");
+            });
+        });
+    }
+
+    // 2. Автоматически обновляем год в подвале сайта.
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+    // 3. Обработка формы обратной связи.
+    const feedbackForm = document.getElementById("feedback-form");
+
+    if (feedbackForm) {
+        feedbackForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(feedbackForm);
+            const name = formData.get("name");
+            const email = formData.get("email");
+            const topic = formData.get("topic");
+            const message = formData.get("message");
+
+            const subject = encodeURIComponent(
+                "Обращение с сайта «Форма»: " + topic
+            );
+
+            const letterText = encodeURIComponent(
+                "Имя: " + name +
+                "\nПочта: " + email +
+                "\nТема: " + topic +
+                "\n\n" + message
+            );
+
+            const note = document.getElementById("form-note");
+
+            if (note) {
+                note.textContent =
+                    "Открываем почтовую программу. Если она не запустилась, " +
+                    "напишите на hello@forma-home.ru.";
+            }
+
+            // Открываем почтовую программу с уже заполненным письмом.
+            window.location.href =
+                "mailto:hello@forma-home.ru?subject=" +
+                subject +
+                "&body=" +
+                letterText;
+        });
+    }
+});
