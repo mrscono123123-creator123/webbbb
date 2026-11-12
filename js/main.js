@@ -1,7 +1,5 @@
-// Основной JavaScript сайта интерьерной студии «Форма».
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Мобильное меню.
     const menuButton = document.querySelector(".menu-toggle");
     const navigation = document.querySelector(".main-nav");
 
@@ -18,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
             navigation.classList.toggle("is-open", !menuIsOpen);
         });
 
-        // Закрываем меню после перехода по любой ссылке.
         navigation.querySelectorAll("a").forEach(function (link) {
             link.addEventListener("click", function () {
                 menuButton.setAttribute("aria-expanded", "false");
@@ -28,14 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 2. Автоматически обновляем год в подвале сайта.
     const yearElement = document.getElementById("current-year");
 
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // 3. Обработка формы обратной связи.
     const feedbackForm = document.getElementById("feedback-form");
 
     if (feedbackForm) {
@@ -67,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     "напишите на hello@forma-home.ru.";
             }
 
-            // Открываем почтовую программу с уже заполненным письмом.
             window.location.href =
                 "mailto:hello@forma-home.ru?subject=" +
                 subject +
