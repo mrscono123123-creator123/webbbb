@@ -34,11 +34,75 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const visionButton = document.getElementById("vision-version-button");
-    if (visionButton) {
+    const visionSettings = document.getElementById("vision-settings");
+    const contrastSelect = document.getElementById("vision-contrast");
+    const spacingCheckbox = document.getElementById("vision-spacing");
+    const fontValue = document.getElementById("vision-font-value");
+    let visionScale = 1;
+
+    function saveVisionSettings() {
+        const settings = {
+            contrast: contrastSelect ? contrastSelect.value : "normal",
+            scale: visionScale,
+            spacing: spacingCheckbox ? spacingCheckbox.checked : false
+        };
+        localStorage.setItem("forma-vision-settings", JSON.stringify(settings));
+    }
+
+    function applyVisionSettings(settings) {
+        const contrast = settings.contrast || "normal";
+        visionScale = Math.min(1.5, Math.max(0.9, Number(settings.scale) || 1));
+        document.body.classList.toggle("vision-mode", contrast !== "normal" || visionScale !== 1 || Boolean(settings.spacing));
+        document.body.classList.toggle("vision-contrast-yellow", contrast === "yellow");
+        document.body.classList.toggle("vision-contrast-inverse", contrast === "inverse");
+        document.body.classList.toggle("vision-spacing", Boolean(settings.spacing));
+        document.body.style.setProperty("--vision-scale", visionScale);
+        if (contrastSelect) contrastSelect.value = contrast;
+        if (spacingCheckbox) spacingCheckbox.checked = Boolean(settings.spacing);
+        if (fontValue) fontValue.textContent = Math.round(visionScale * 100) + "%";
+    }
+
+    if (visionButton && visionSettings) {
         visionButton.addEventListener("click", function () {
-            const enabled = document.body.classList.toggle("vision-mode");
-            visionButton.setAttribute("aria-pressed", String(enabled));
-            visionButton.textContent = enabled ? "Обычная версия" : "Версия для слабовидящих";
+            const isOpen = !visionSettings.hidden;
+            visionSettings.hidden = isOpen;
+            visionButton.setAttribute("aria-expanded", String(!isOpen));
+        });
+
+        let savedSettings = {};
+        try {
+            savedSettings = JSON.parse(localStorage.getItem("forma-vision-settings") || "{}");
+        } catch (error) {
+            savedSettings = {};
+        }
+        applyVisionSettings(savedSettings);
+
+        if (contrastSelect) {
+            contrastSelect.addEventListener("change", function () {
+                const settings = {contrast: contrastSelect.value, scale: visionScale, spacing: spacingCheckbox.checked};
+                applyVisionSettings(settings);
+                saveVisionSettings();
+            });
+        }
+
+        document.getElementById("vision-font-larger").addEventListener("click", function () {
+            applyVisionSettings({contrast: contrastSelect.value, scale: visionScale + 0.1, spacing: spacingCheckbox.checked});
+            saveVisionSettings();
+        });
+
+        document.getElementById("vision-font-smaller").addEventListener("click", function () {
+            applyVisionSettings({contrast: contrastSelect.value, scale: visionScale - 0.1, spacing: spacingCheckbox.checked});
+            saveVisionSettings();
+        });
+
+        spacingCheckbox.addEventListener("change", function () {
+            applyVisionSettings({contrast: contrastSelect.value, scale: visionScale, spacing: spacingCheckbox.checked});
+            saveVisionSettings();
+        });
+
+        document.getElementById("vision-reset").addEventListener("click", function () {
+            applyVisionSettings({contrast: "normal", scale: 1, spacing: false});
+            saveVisionSettings();
         });
     }
 
