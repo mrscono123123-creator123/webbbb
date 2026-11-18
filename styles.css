@@ -775,3 +775,114 @@ body.print-version .news-card {
 @media(max-width:430px) {
   .smart-filter { grid-template-columns: 1fr; }
 }
+
+
+.vision-settings {
+  flex-basis: 100%;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 12px 18px;
+  padding: 18px;
+  border: 2px solid #343330;
+  background: #fff;
+  color: #000;
+}
+.vision-settings[hidden] { display: none; }
+.vision-settings > label,
+.vision-size-controls > span { font-size: 14px; font-weight: bold; }
+.vision-settings select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px;
+  border: 2px solid #343330;
+  background: #fff;
+  color: #000;
+  font: 14px Arial, sans-serif;
+}
+.vision-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.vision-size-controls output { min-width: 48px; font-weight: bold; }
+.vision-spacing-label { grid-column: 1 / -1; display: flex; align-items: center; gap: 9px; }
+.vision-spacing-label input { width: 20px; height: 20px; }
+body.vision-mode {
+  --vision-text: #000;
+  --vision-background: #fff;
+  color: var(--vision-text) !important;
+  background: var(--vision-background) !important;
+  font-size: calc(18px * var(--vision-scale, 1)) !important;
+  line-height: 1.8 !important;
+}
+body.vision-mode,
+body.vision-mode main,
+body.vision-mode section,
+body.vision-mode article,
+body.vision-mode .site-header,
+body.vision-mode .site-footer,
+body.vision-mode .about,
+body.vision-mode .catalog-card,
+body.vision-mode .price-note,
+body.vision-mode .filter-product {
+  color: var(--vision-text) !important;
+  background-color: var(--vision-background) !important;
+}
+body.vision-mode main p,
+body.vision-mode main li,
+body.vision-mode main address,
+body.vision-mode main label,
+body.vision-mode main td,
+body.vision-mode main th,
+body.vision-mode main input,
+body.vision-mode main select,
+body.vision-mode main textarea,
+body.vision-mode main a,
+body.vision-mode main h1,
+body.vision-mode main h2,
+body.vision-mode main h3 {
+  color: var(--vision-text) !important;
+  font-size: 1em !important;
+  line-height: 1.8 !important;
+}
+body.vision-mode main h1,
+body.vision-mode main h2,
+body.vision-mode main h3 { font-weight: 700 !important; }
+body.vision-mode a { text-decoration: underline !important; text-decoration-thickness: 2px !important; }
+body.vision-mode button,
+body.vision-mode input,
+body.vision-mode select,
+body.vision-mode textarea {
+  color: var(--vision-text) !important;
+  background: var(--vision-background) !important;
+  border: 2px solid var(--vision-text) !important;
+}
+body.vision-mode .tool-button,
+body.vision-mode .submit-button {
+  color: var(--vision-background) !important;
+  background: var(--vision-text) !important;
+  border: 2px solid var(--vision-text) !important;
+}
+body.vision-contrast-yellow {
+  --vision-text: #ffff00;
+  --vision-background: #000;
+}
+body.vision-contrast-inverse {
+  --vision-text: #fff;
+  --vision-background: #071b3d;
+}
+body.vision-spacing,
+body.vision-spacing main p,
+body.vision-spacing main li,
+body.vision-spacing main label,
+body.vision-spacing main a {
+  letter-spacing: .08em !important;
+  word-spacing: .16em !important;
+  line-height: 2.1 !important;
+}
+@media(max-width:700px) {
+  .vision-settings { grid-template-columns: 1fr; }
+  .vision-size-controls { justify-content: flex-start; }
+}
