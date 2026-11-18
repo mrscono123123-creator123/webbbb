@@ -551,7 +551,6 @@ h1,h2,p {
 }
 
 
-/* Настройки доступности */
 .accessibility-tools {
   width: min(var(--content), calc(100% - 64px));
   margin: 14px auto 0;
@@ -636,7 +635,6 @@ body.vision-mode .submit-button {
   border: 2px solid #000;
 }
 body.print-version .site-header,
-body.print-version .accessibility-tools,
 body.print-version .site-footer,
 body.print-version .menu-toggle,
 body.print-version .map-wrap iframe,
