@@ -34,6 +34,10 @@
         </nav>
       </div>
     </header>
+        <div class="accessibility-tools" aria-label="Настройки отображения сайта">
+      <button class="tool-button" id="print-version-button" type="button" aria-pressed="false">Версия для печати</button>
+      <button class="tool-button" id="vision-version-button" type="button" aria-pressed="false">Версия для слабовидящих</button>
+    </div>
     <main id="top">
       <section class="page-hero">
         <p class="eyebrow">
@@ -46,6 +50,62 @@
           Выберите направление, чтобы познакомиться с ассортиментом. Для уточнения наличия и размеров свяжитесь с нами.
         </p>
       </section>
+      <section class="content-section smart-filter-section" id="smart-filter" aria-labelledby="smart-filter-title">
+        <div class="filter-heading">
+          <p class="eyebrow">Подбор товаров</p>
+          <h2 id="smart-filter-title">Умный <em>фильтр</em></h2>
+          <p>Выберите параметры — несовместимые варианты автоматически станут недоступны.</p>
+        </div>
+        <div class="smart-filter" role="group" aria-label="Параметры подбора товаров">
+          <div class="filter-field">
+            <label for="filter-category">Категория</label>
+            <select id="filter-category">
+              <option value="">Все категории</option>
+              <option value="furniture">Мебель</option>
+              <option value="bedding">Постельный текстиль</option>
+              <option value="bathroom">Ванная комната</option>
+              <option value="accessories">Аксессуары</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filter-material">Материал</label>
+            <select id="filter-material">
+              <option value="">Любой материал</option>
+              <option value="wood">Дерево</option>
+              <option value="fabric">Ткань</option>
+              <option value="cotton">Хлопок</option>
+              <option value="metal">Металл</option>
+              <option value="ceramic">Керамика</option>
+              <option value="other">Другие материалы</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filter-room">Комната</label>
+            <select id="filter-room">
+              <option value="">Любая комната</option>
+              <option value="living">Гостиная</option>
+              <option value="bedroom">Спальня</option>
+              <option value="bathroom">Ванная</option>
+              <option value="any">Универсальные</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="filter-price">Максимальная цена</label>
+            <select id="filter-price">
+              <option value="">Без ограничения</option>
+              <option value="3000">До 3 000 ₽</option>
+              <option value="10000">До 10 000 ₽</option>
+              <option value="20000">До 20 000 ₽</option>
+              <option value="30000">До 30 000 ₽</option>
+              <option value="40000">До 40 000 ₽</option>
+            </select>
+          </div>
+          <button class="filter-reset" id="filter-reset" type="button">Сбросить фильтры</button>
+        </div>
+        <p class="filter-result-count" id="filter-result-count" aria-live="polite">Найдено товаров: 12</p>
+        <div class="filter-results" id="filter-results" aria-live="polite"></div>
+      </section>
+
       <section class="content-section catalog-list">
         <article class="catalog-card" id="furniture">
           <img src="images/furniture.svg" alt="Мебель">
