@@ -36,7 +36,24 @@
     </header>
         <div class="accessibility-tools" aria-label="Настройки отображения сайта">
       <button class="tool-button" id="print-version-button" type="button" aria-pressed="false">Версия для печати</button>
-      <button class="tool-button" id="vision-version-button" type="button" aria-pressed="false">Версия для слабовидящих</button>
+      <button class="tool-button" id="vision-version-button" type="button" aria-expanded="false" aria-controls="vision-settings">Настройки для слабовидящих</button>
+      <div class="vision-settings" id="vision-settings" hidden>
+        <label for="vision-contrast">Цветовая схема</label>
+        <select id="vision-contrast">
+          <option value="normal">Обычная</option>
+          <option value="contrast">Чёрный текст на белом фоне</option>
+          <option value="yellow">Жёлтый текст на чёрном фоне</option>
+          <option value="inverse">Белый текст на тёмно-синем фоне</option>
+        </select>
+        <div class="vision-size-controls">
+          <span>Размер текста</span>
+          <button class="tool-button" id="vision-font-smaller" type="button" aria-label="Уменьшить текст">А−</button>
+          <button class="tool-button" id="vision-font-larger" type="button" aria-label="Увеличить текст">А+</button>
+          <output id="vision-font-value" aria-live="polite">100%</output>
+        </div>
+        <label class="vision-spacing-label"><input id="vision-spacing" type="checkbox"> Увеличить расстояние между строками и буквами</label>
+        <button class="tool-button" id="vision-reset" type="button">Сбросить настройки</button>
+      </div>
     </div>
     <main id="top">
       <section class="intro">
